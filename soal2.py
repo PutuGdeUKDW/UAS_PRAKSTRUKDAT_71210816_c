@@ -81,7 +81,7 @@ class PQSTugas:
             print('Sudah tidak ada tugas yang bisa dihapus')
     def removePriority(self, priority) -> None:
         if self.isEmpty == True:
-            print("")
+            print("Sudah tidak ada tugas yang bisa dihapus")
         else:
             helper = self._head
             counter = 1
@@ -105,7 +105,22 @@ class PQSTugas:
                 helper._next = None
                 self._tail = helper
                 self.size = self._size - counter
-            
+            elif helper._priority != priority and self._tail._priority != priority and guh ==  False:
+                helper = self._head
+                while helper._next._priority != priority:
+                    helper = helper._next
+                    counter = counter + 1
+
+                helper2 = helper
+                while helper2._next._priority == priority or helper2._next._priority == None:
+                    helper2 = helper2._next
+                    counter = counter + 1
+
+                helper._next = helper2
+                helper2._prev =helper
+                self.size = self._size - counter
+
+
             else:
                 print(f'Tidak terdapat tugas prioritas {priority}')
 
@@ -124,6 +139,6 @@ if __name__ == "__main__":
  tugasKu.printAll()
  tugasKu.remove()
  tugasKu.printAll()
- #tugasKu.removePriority(2)
- #tugasKu.removePriority(4)
- #tugasKu.printtAll()
+ tugasKu.removePriority(2)
+ tugasKu.removePriority(4)
+ tugasKu.printAll()
